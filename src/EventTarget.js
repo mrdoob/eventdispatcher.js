@@ -2,7 +2,7 @@
  * @author mr.doob / http://mrdoob.com/
  */
 
-EventTarget = function () {
+var EventTarget = function () {
 
 	var listeners = {};
 
