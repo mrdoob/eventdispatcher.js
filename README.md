@@ -22,8 +22,6 @@ eventtarget.js
 		};
 
 	};
-	Car.prototype = new EventTarget();
-	Car.prototype.constructor = Car;
 
 
 	// Using events
