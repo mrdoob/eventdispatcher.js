@@ -34,7 +34,7 @@ eventtarget.js
 		alert( 'vroom vroom!' );
 
 	} );
-	car.update();
+	car.start();
 
 </script>
 ```
