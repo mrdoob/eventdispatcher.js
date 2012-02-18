@@ -1,7 +1,7 @@
 eventtarget.js
 ========
 
-#### Javacript events for custom objects ####
+#### JavaScript events for custom objects ####
 
 ### Usage ###
 
