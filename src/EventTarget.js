@@ -24,7 +24,7 @@ var EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.bind = function ( type, listener, ctx ) {
+    this.addEventListener = function ( type, listener, ctx ) {
         var obj = {callback: listener, context: ctx};
         var exists = false;
         var events;
@@ -58,7 +58,7 @@ var EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.trigger = function ( event ) {
+    this.dispatchEvent = function ( event ) {
         var events = listeners[ event.type ];
 
         if (typeof events !== 'undefined') {
@@ -78,7 +78,7 @@ var EventTarget = function () {
      * @author Mr.Doob
      * @author Thodoris Tsiridis
      */
-    this.unbind = function ( type, listener, ctx) {
+    this.removeEventListener = function ( type, listener, ctx) {
         var index;
         var events = listeners[type];
 
