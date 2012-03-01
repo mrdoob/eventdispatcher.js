@@ -15,7 +15,7 @@ eventtarget.js
 		EventTarget.call( this );
 
 		this.start = function () {
-			this.trigger( { type: 'started', foo: 'bar' } );
+			this.dispatchEvent( { type: 'started', foo: 'bar' } );
 		};
 
 	};
@@ -28,10 +28,10 @@ eventtarget.js
 	// Using events
 	var car = new Car();
 	// Bind
-	car.bind( 'started', carStarted, car );
+	car.addEventListener( 'started', carStarted, car );
 	// Dispatch the event
 	car.start();
 	// Unbind
-	car.unbind('started', carStarted, car);
+	car.removeEventListener('started', carStarted, car);
 </script>
 ```
