@@ -8,7 +8,7 @@ var EventTarget = function () {
 
 	this.addEventListener = function ( type, listener ) {
 
-		if ( listeners[ type ] == undefined ) {
+		if ( listeners[ type ] === undefined ) {
 
 			listeners[ type ] = [];
 
@@ -24,9 +24,13 @@ var EventTarget = function () {
 
 	this.dispatchEvent = function ( event ) {
 
-		for ( var i = 0, l = listeners[ event.type ].length; i < l; i ++ ) {
+		if ( listeners[ event.type ] !== undefined ) {
 
-			listeners[ event.type ][ i ]( event );
+			for ( var i = 0, l = listeners[ event.type ].length; i < l; i ++ ) {
+
+				listeners[ event.type ][ i ]( event );
+
+			}
 
 		}
 
