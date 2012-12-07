@@ -30,7 +30,7 @@ var EventTarget = function () {
 
 			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
 
-				listenerArray[ i ]( event );
+				listenerArray[ i ].call( this, event );
 
 			}
 
