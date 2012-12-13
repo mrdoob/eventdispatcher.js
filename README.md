@@ -1,4 +1,4 @@
-eventtarget.js
+eventdispatcher.js
 ========
 
 #### JavaScript events for custom objects ####
@@ -6,18 +6,18 @@ eventtarget.js
 ### Usage ###
 
 ```html
-<script src="EventTarget.js"></script>
+<script src="EventDispatcher.js"></script>
 <script>
 
 	// Applying EventTarget to custom object
 
 	var Car = function () {
 
-		EventTarget.call( this );
+		EventDispatcher.call( this );
 
 		this.start = function () {
 
-			this.dispatchEvent( { type: 'started', foo: 'bar' } );
+			this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
 
 		};
 
@@ -27,9 +27,9 @@ eventtarget.js
 	// Using events
 
 	var car = new Car();
-	car.addEventListener( 'started', function ( event ) {
+	car.addEventListener( 'start', function ( event ) {
 
-		alert( 'vroom vroom!' );
+		alert( event.message );
 
 	} );
 	car.start();
