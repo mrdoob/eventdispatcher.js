@@ -9,7 +9,7 @@ eventdispatcher.js
 <script src="EventDispatcher.js"></script>
 <script>
 
-	// Applying EventTarget to custom object
+	// Adding events to custom object
 
 	var Car = function () {
 
