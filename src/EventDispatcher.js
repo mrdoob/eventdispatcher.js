@@ -22,6 +22,26 @@ var EventDispatcher = function () {
 
 	};
 
+    this.hasEventListener = function ( type, listener ) {
+        
+        var listener = listener || false;
+        
+        if ( listeners[ type ] === undefined ) {
+            
+            return false;
+            
+        } else {
+            
+            if ( ( listener && listeners[ type ].indexOf( listener ) !== - 1 ) || !listener ) {
+                
+                return true;
+                
+            } else return false;
+            
+        }
+        
+    };
+    
 	this.removeEventListener = function ( type, listener ) {
 
 		var index = listeners[ type ].indexOf( listener );
