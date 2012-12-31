@@ -37,17 +37,12 @@ var EventDispatcher = function () {
 	this.dispatchEvent = function ( event ) {
 
 		var listenerArray = listeners[ event.type ];
-
-		if ( listenerArray !== undefined ) {
-			
-			event.target = this;
-
-			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
-
-				listenerArray[ i ].call( this, event );
-
-			}
-
+		if ( listenerArray == undefined ) return;
+		event.target = this;
+		var i = listenerArray.length;
+		while (i-- > 0)
+		{
+			listenerArray[i].call(this, event);
 		}
 
 	};
