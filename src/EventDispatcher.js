@@ -39,10 +39,12 @@ var EventDispatcher = function () {
 		var listenerArray = listeners[ event.type ];
 		if ( listenerArray == undefined ) return;
 		event.target = this;
-		var i = listenerArray.length;
-		while (i-- > 0)
-		{
-			listenerArray[i].call(this, event);
+		var listenerArrayClone=listenerArray.slice();
+		
+		for ( var i = 0, l = listenerArrayClone.length; i < l; i ++ ) {
+
+			listenerArrayClone[ i ].call( this, event );
+
 		}
 
 	};
