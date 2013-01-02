@@ -5,6 +5,7 @@
 var EventDispatcher = function () {
 
 	var listeners = {};
+	var array = [];
 
 	this.addEventListener = function ( type, listener ) {
 
@@ -39,11 +40,11 @@ var EventDispatcher = function () {
 		var listenerArray = listeners[ event.type ];
 		if ( listenerArray == undefined ) return;
 		event.target = this;
-		var listenerArrayClone=listenerArray.slice();
+		array=listenerArray.slice();
 		
-		for ( var i = 0, l = listenerArrayClone.length; i < l; i ++ ) {
+		for ( var i = 0, l = array.length; i < l; i ++ ) {
 
-			listenerArrayClone[ i ].call( this, event );
+			array[ i ].call( this, event );
 
 		}
 
