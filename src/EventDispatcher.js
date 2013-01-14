@@ -49,7 +49,13 @@ var EventDispatcher = function () {
 		var listenerArray = listeners[ event.type ];
 
 		if ( listenerArray !== undefined ) {
+                           
+                           if(listenerArray.isDispatching){
 
+                                   listenerArray.wasReRequested = true;
+
+                           }
+                           
 			listenerArray.isDispatching = true
 
 			event.target = this;
@@ -81,6 +87,12 @@ var EventDispatcher = function () {
 			}
  
                            listenerArray.isDispatching = false;
+
+                           if(listenerArray.wasReRequested){
+
+                                   this.dispatchEvent(event);
+                                   
+                           }
 
 		}
 
