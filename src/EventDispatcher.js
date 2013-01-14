@@ -62,7 +62,7 @@ var EventDispatcher = function () {
 
                                             for(var j = 0, k = listenerArray.removedIndexes.length; j < k; j++){
 
-                                                    if(listenerArray.removedIndexes < i){
+                                                    if(listenerArray.removedIndexes[ j ] < i){
                                                     
                                                             i--;
 
