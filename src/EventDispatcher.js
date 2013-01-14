@@ -60,6 +60,8 @@ var EventDispatcher = function () {
 
                                    listenerArray.wasReRequested = true;
 
+                                    return;
+
                            }
                            
 			listenerArray.isDispatching = true
