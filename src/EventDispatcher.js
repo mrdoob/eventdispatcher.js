@@ -4,114 +4,114 @@
 
 var EventDispatcher = function () {
 
-	var listeners = {};
+    var listeners = {};
 
-	this.addEventListener = function ( type, listener ) {
+    this.addEventListener = function (type, listener) {
 
-		if ( listeners[ type ] === undefined ) {
+        if (listeners[ type ] === undefined) {
 
-			listeners[ type ] = [];
+            listeners[ type ] = [];
 
-		}
+        }
 
-		if ( listeners[ type ].indexOf( listener ) === - 1 ) {
+        if (listeners[ type ].indexOf(listener) === -1) {
 
-			listeners[ type ].push( listener );
-                           
-                           if(listeners[ type ].isDispatching) {
+            listeners[ type ].push(listener);
 
-                                   listeners[ type ].numListenersAdded++;
+            if (listeners[ type ].isDispatching) {
 
-                           }
+                listeners[ type ].numListenersAdded++;
 
-		}
+            }
 
-	};
+        }
 
-	this.removeEventListener = function ( type, listener ) {
+    };
 
-		var index = listeners[ type ].indexOf( listener );
+    this.removeEventListener = function (type, listener) {
 
-		if ( index !== - 1 ) {
+        var index = listeners[ type ].indexOf(listener);
 
-                           if( listeners[ type ].isDispatching ) {
+        if (index !== -1) {
 
-                                   listeners[ type ].dispatchQueueUpdated = true;
+            if (listeners[ type ].isDispatching) {
 
-                                   listeners[ type ].removedIndexes.push(index);
+                listeners[ type ].dispatchQueueUpdated = true;
 
-                           }
+                listeners[ type ].removedIndexes.push(index);
 
-			listeners[ type ].splice( index, 1 );
+            }
 
-		}
+            listeners[ type ].splice(index, 1);
 
-	};
+        }
 
-	this.dispatchEvent = function ( event ) {
+    };
 
-		var listenerArray = listeners[ event.type ];
+    this.dispatchEvent = function (event) {
 
-		if ( listenerArray !== undefined ) {
+        var listenerArray = listeners[ event.type ];
 
-                           if(listenerArray.isDispatching){
+        if (listenerArray !== undefined) {
 
-                                   listenerArray.wasReRequested = true;
+            if (listenerArray.isDispatching) {
 
-                                    return;
+                listenerArray.wasReRequested = true;
 
-                           }
-                           
-			listenerArray.isDispatching = true;
+                return;
 
-                           listenerArray.dispatchQueueUpdated = false;
+            }
 
-                           listenerArray.removedIndexes = [];
+            listenerArray.isDispatching = true;
 
-                           listenerArray.numListenersAdded = 0;
+            listenerArray.dispatchQueueUpdated = false;
 
-			event.target = this;
+            listenerArray.removedIndexes = [];
 
-			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
+            listenerArray.numListenersAdded = 0;
 
-                                    if(listenerArray.dispatchQueueUpdated){
-                                        
-                                            l = listenerArray.length - listenerArray.numListenersAdded;
+            event.target = this;
 
-                                            var iOld = i;
+            for (var i = 0, l = listenerArray.length; i < l; i++) {
 
-                                            for(var j = 0, k = listenerArray.removedIndexes.length; j < k; j++) {
+                if (listenerArray.dispatchQueueUpdated) {
 
-                                                    if(listenerArray.removedIndexes[ j ] < iOld){
-                                                    
-                                                            i--;
+                    l = listenerArray.length - listenerArray.numListenersAdded;
 
-                                                    }
+                    var iOld = i;
 
-                                            }
-                                            
-                                            listenerArray.removedIndexes = [];
+                    for (var j = 0, k = listenerArray.removedIndexes.length; j < k; j++) {
 
-                                            listenerArray.dispatchQueueUpdated = false;
+                        if (listenerArray.removedIndexes[ j ] < iOld) {
 
-                                    }
+                            i--;
 
-				listenerArray[ i ].call( this, event );
+                        }
 
-			}
- 
-                           listenerArray.isDispatching = false;
-                           
-                           if(listenerArray.wasReRequested){
+                    }
 
-                                   listenerArray.wasReRequested = false;
+                    listenerArray.removedIndexes = [];
 
-                                   this.dispatchEvent(event);                              
-                                   
-                           }
+                    listenerArray.dispatchQueueUpdated = false;
 
-		}
+                }
 
-	};
+                listenerArray[ i ].call(this, event);
+
+            }
+
+            listenerArray.isDispatching = false;
+
+            if (listenerArray.wasReRequested) {
+
+                listenerArray.wasReRequested = false;
+
+                setTimeout(function(){this.dispatchEvent(event);}.bind(this),0);
+
+            }
+
+        }
+
+    };
 
 };
