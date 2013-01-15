@@ -37,8 +37,6 @@ var EventDispatcher = function () {
                            if( listeners[ type ].isDispatching ) {
 
                                    listeners[ type ].dispatchQueueUpdated = true;
-                                   
-                                   listeners[ type ].removedIndexes = listeners[ type ].removedIndexes || [];
 
                                    listeners[ type ].removedIndexes.push(index);
 
@@ -66,9 +64,11 @@ var EventDispatcher = function () {
                            
 			listenerArray.isDispatching = true
 
-			event.target = this;
+                           listenerArray.removedIndexes = [];
 
                            listenerArray.numListenersAdded = 0;
+
+			event.target = this;
 
 			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
 
@@ -76,7 +76,9 @@ var EventDispatcher = function () {
                                         
                                             l = listenerArray.length - listenerArray.numListenersAdded;
 
-                                            for(var j = 0, k = listenerArray.removedIndexes.length; j < k; j++){
+                                            var j = listenerArray.removedIndexes.length;
+
+                                            while(j--){
 
                                                     if(listenerArray.removedIndexes[ j ] < i){
                                                     
@@ -84,8 +86,10 @@ var EventDispatcher = function () {
 
                                                     }
 
-                                            }
+                                                    listenerArray.removedIndexes.pop();
 
+                                            }
+                                            
                                             listenerArray.dispatchQueueUpdated = false;
 
                                             delete listenerArray.removedIndexes;
