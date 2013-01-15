@@ -102,7 +102,9 @@ var EventDispatcher = function () {
                            
                            if(listenerArray.wasReRequested){
 
-                                   this.dispatchEvent(event);
+                                   listenerArray.wasReRequested = false;
+
+                                   this.dispatchEvent(event);                              
                                    
                            }
 
