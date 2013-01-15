@@ -62,7 +62,9 @@ var EventDispatcher = function () {
 
                            }
                            
-			listenerArray.isDispatching = true
+			listenerArray.isDispatching = true;
+
+                           listenerArray.dispatchQueueUpdated = false;
 
                            listenerArray.removedIndexes = [];
 
@@ -76,23 +78,21 @@ var EventDispatcher = function () {
                                         
                                             l = listenerArray.length - listenerArray.numListenersAdded;
 
-                                            var j = listenerArray.removedIndexes.length;
+                                            var iOld = i;
 
-                                            while(j--){
+                                            for(var j = 0, k = listenerArray.removedIndexes.length; j < k; j++) {
 
-                                                    if(listenerArray.removedIndexes[ j ] < i){
+                                                    if(listenerArray.removedIndexes[ j ] < iOld){
                                                     
                                                             i--;
 
                                                     }
 
-                                                    listenerArray.removedIndexes.pop();
-
                                             }
                                             
-                                            listenerArray.dispatchQueueUpdated = false;
+                                            listenerArray.removedIndexes = [];
 
-                                            delete listenerArray.removedIndexes;
+                                            listenerArray.dispatchQueueUpdated = false;
 
                                     }
 
@@ -101,8 +101,6 @@ var EventDispatcher = function () {
 			}
  
                            listenerArray.isDispatching = false;
-
-                           listenerArray.numListenersAdded = 0;
                            
                            if(listenerArray.wasReRequested){
 
