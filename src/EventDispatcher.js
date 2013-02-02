@@ -34,6 +34,14 @@ var EventDispatcher = function () {
 		}
 
 	};
+	
+	this.removeAllEventListeners=function()
+	{
+
+		this.listeners ={};
+		this.array=[];
+
+	};
 
 	this.dispatchEvent = function ( event ) {
 
