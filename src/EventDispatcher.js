@@ -16,7 +16,7 @@ var EventDispatcher = function () {
 
 		if ( listeners[ type ].indexOf( listener ) === - 1 ) {
 
-			listeners[ type ].push( listener );
+			listeners[ type ].unshift( listener );
 
 		}
 
@@ -33,22 +33,24 @@ var EventDispatcher = function () {
 		}
 
 	};
+	
+	this.removeAllEventListeners=function()
+	{
+
+		listeners ={};
+
+	};
 
 	this.dispatchEvent = function ( event ) {
 
 		var listenerArray = listeners[ event.type ];
-
-		if ( listenerArray !== undefined ) {
-			
-			event.target = this;
-
-			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
-
-				listenerArray[ i ].call( this, event );
-
-			}
-
-		}
+		if ( listenerArray == undefined ) return;
+    		event.target = this;
+   		var i = listenerArray.length;
+  		 while (i-- > 0)
+   		{
+     			listenerArray[i].call(this, event);
+     		}
 
 	};
 
