@@ -5,7 +5,6 @@
 var EventDispatcher = function () {
 
 	var listeners = {};
-	var array = [];
 
 	this.addEventListener = function ( type, listener ) {
 
@@ -17,7 +16,7 @@ var EventDispatcher = function () {
 
 		if ( listeners[ type ].indexOf( listener ) === - 1 ) {
 
-			listeners[ type ].push( listener );
+			listeners[ type ].unshift( listener );
 
 		}
 
@@ -39,7 +38,6 @@ var EventDispatcher = function () {
 	{
 
 		listeners ={};
-		array=[];
 
 	};
 
@@ -47,14 +45,12 @@ var EventDispatcher = function () {
 
 		var listenerArray = listeners[ event.type ];
 		if ( listenerArray == undefined ) return;
-		event.target = this;
-		array=listenerArray.slice();
-		
-		for ( var i = 0, l = array.length; i < l; i ++ ) {
-
-			array[ i ].call( this, event );
-
-		}
+    		event.target = this;
+   		var i = listenerArray.length;
+  		 while (i-- > 0)
+   		{
+     			listenerArray[i].call(this, event);
+     		}
 
 	};
 
