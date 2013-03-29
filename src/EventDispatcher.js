@@ -2,11 +2,17 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var EventDispatcher = function () {
+var EventDispatcher = function () {}
 
-	var listeners = {};
+EventDispatcher.prototype = {
 
-	this.addEventListener = function ( type, listener ) {
+	constructor: EventDispatcher,
+
+	addEventListener: function ( type, listener ) {
+
+		if ( this._listeners === undefined ) this._listeners = {};
+
+		var listeners = this._listeners;
 
 		if ( listeners[ type ] === undefined ) {
 
@@ -20,10 +26,13 @@ var EventDispatcher = function () {
 
 		}
 
-	};
+	},
 
-	this.removeEventListener = function ( type, listener ) {
+	removeEventListener: function ( type, listener ) {
 
+		if ( this._listeners === undefined ) return;
+
+		var listeners = this._listeners;
 		var index = listeners[ type ].indexOf( listener );
 
 		if ( index !== - 1 ) {
@@ -32,14 +41,17 @@ var EventDispatcher = function () {
 
 		}
 
-	};
+	},
 
-	this.dispatchEvent = function ( event ) {
+	dispatchEvent: function ( event ) {
 
+		if ( this._listeners === undefined ) return;
+
+		var listeners = this._listeners;
 		var listenerArray = listeners[ event.type ];
 
 		if ( listenerArray !== undefined ) {
-			
+
 			event.target = this;
 
 			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
@@ -50,6 +62,6 @@ var EventDispatcher = function () {
 
 		}
 
-	};
+	}
 
 };
