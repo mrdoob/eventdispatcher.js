@@ -1,31 +1,66 @@
-<script src="../src/EventDispatcher.js"></script>
-<script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8" />
+    </head>
+    <body>
+        <script src="../src/EventDispatcher.js"></script>
+        <script>
 
-	// Adding events to custom object
+            // Adding events to custom object
 
-	var Car = function () {
+            var Car = function () {
 
-		this.start = function () {
+                EventDispatcher.call( this );
 
-			this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
+                this.start = function () {
 
-		};
+                    this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
 
-	};
+                };
 
-	Car.prototype = Object.create( EventDispatcher.prototype );
+            };
 
 
-	// Using events
+            // Using the EventDispatcher prototype
 
-	var car = new Car();
+            var PrototypicalCar = function() {
 
-	car.addEventListener( 'start', function ( event ) {
+                this.start = function() {
 
-		alert( event.message );
+                    this.dispatchEvent( { type: 'start', message: 'prototypical vrooom!' } );
 
-	} );
+                };
 
-	car.start();
+            };
 
-</script>
+            PrototypicalCar.prototype = Object.create( EventDispatcher.prototype );
+
+
+            // Using events
+
+            var car = new Car();
+
+            car.addEventListener( 'start', function ( event ) {
+
+                console.log( event.message );
+
+            } );
+
+            car.start();
+
+
+
+            var prototypicalCar = new PrototypicalCar();
+
+            prototypicalCar.addEventListener( 'start', function( event ) {
+
+                console.log( event.message );
+
+            } );
+
+            prototypicalCar.start();
+
+        </script>
+    </body>
+</html>
