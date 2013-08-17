@@ -2,7 +2,14 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var EventDispatcher = function () {}
+var EventDispatcher = function () {
+
+	this.addEventListener = EventDispatcher.prototype.addEventListener;
+	this.hasEventListener = EventDispatcher.prototype.hasEventListener;
+	this.removeEventListener = EventDispatcher.prototype.removeEventListener;
+	this.dispatchEvent = EventDispatcher.prototype.dispatchEvent;
+
+};
 
 EventDispatcher.prototype = {
 
