@@ -8,6 +8,15 @@ EventDispatcher.prototype = {
 
 	constructor: EventDispatcher,
 
+	apply: function ( object ) {
+
+		object.addEventListener = EventDispatcher.prototype.addEventListener;
+		object.hasEventListener = EventDispatcher.prototype.hasEventListener;
+		object.removeEventListener = EventDispatcher.prototype.removeEventListener;
+		object.dispatchEvent = EventDispatcher.prototype.dispatchEvent;
+
+	},
+
 	addEventListener: function ( type, listener ) {
 
 		if ( this._listeners === undefined ) this._listeners = {};

@@ -21,7 +21,7 @@ eventdispatcher.js
 
 	};
 
-	Car.prototype = Object.create( EventDispatcher.prototype );
+	EventDispatcher.prototype.apply( Car.prototype );
 
 
 	// Using events
