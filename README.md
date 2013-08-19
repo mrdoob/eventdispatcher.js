@@ -13,8 +13,6 @@ eventdispatcher.js
 
 	var Car = function () {
 
-		EventDispatcher.call( this );
-
 		this.start = function () {
 
 			this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
@@ -23,15 +21,19 @@ eventdispatcher.js
 
 	};
 
+	EventDispatcher.prototype.apply( Car.prototype );
+
 
 	// Using events
 
 	var car = new Car();
+
 	car.addEventListener( 'start', function ( event ) {
 
 		alert( event.message );
 
 	} );
+
 	car.start();
 
 </script>
