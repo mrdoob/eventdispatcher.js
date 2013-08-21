@@ -74,14 +74,19 @@ EventDispatcher.prototype = {
 
 		var listeners = this._listeners;
 		var listenerArray = listeners[ event.type ];
+		var listener;
 
 		if ( listenerArray !== undefined ) {
 
 			event.target = this;
 
 			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
-
-				listenerArray[ i ].call( this, event );
+				listener = listenerArray[ i ];
+				if (listener.handleEvent) {
+					listener.handleEvent.call( this, event );
+				} else {
+					listener.call( this, event );
+				}
 
 			}
 
