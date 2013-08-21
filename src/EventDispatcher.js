@@ -83,7 +83,7 @@ EventDispatcher.prototype = {
 			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
 				listener = listenerArray[ i ];
 				if (listener.handleEvent) {
-					listener.handleEvent.call( this, event );
+					listener.handleEvent.call( listener, event );
 				} else {
 					listener.call( this, event );
 				}
