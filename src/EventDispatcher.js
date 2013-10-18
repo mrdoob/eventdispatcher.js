@@ -79,6 +79,8 @@ EventDispatcher.prototype = {
 
 			event.target = this;
 
+			listenerArray = listenerArray.slice();
+
 			for ( var i = 0, l = listenerArray.length; i < l; i ++ ) {
 
 				listenerArray[ i ].call( this, event );
