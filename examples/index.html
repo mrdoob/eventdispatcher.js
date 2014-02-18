@@ -20,12 +20,16 @@
 
 	var car = new Car();
 
-	car.addEventListener( 'start', function ( event ) {
+	var starter = car.addEventListener( 'start', function ( event ) {
 
 		alert( event.message );
 
 	} );
 
 	car.start();
+	
+	// Optional way to simply remove the event using the reference to the handler.
+	starter();
+	
 
 </script>

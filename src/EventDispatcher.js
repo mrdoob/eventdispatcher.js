@@ -21,7 +21,8 @@ EventDispatcher.prototype = {
 
 		if ( this._listeners === undefined ) this._listeners = {};
 
-		var listeners = this._listeners;
+		var listeners = this._listeners,
+			_this = this;
 
 		if ( listeners[ type ] === undefined ) {
 
@@ -33,6 +34,10 @@ EventDispatcher.prototype = {
 
 			listeners[ type ].push( listener );
 
+		}
+		
+		return function () {
+			_this.removeEventListener(type, listener);
 		}
 
 	},

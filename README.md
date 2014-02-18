@@ -35,6 +35,9 @@ eventdispatcher.js
 	} );
 
 	car.start();
+	
+	// Optional way to simply remove the event using the reference to the handler.
+	starter();
 
 </script>
 ```
