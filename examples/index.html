@@ -28,4 +28,16 @@
 
 	car.start();
 
+	car.removeAllEventListeners();
+
+	car.start();
+
+	car.addEventListener( 'start', function ( event ) {
+
+		alert( event.message + " again!" );
+
+	} );
+
+	car.start();
+	
 </script>
