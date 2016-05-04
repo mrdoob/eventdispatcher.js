@@ -2,20 +2,9 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var EventDispatcher = function () {}
+var EventDispatcher = function () {};
 
-EventDispatcher.prototype = {
-
-	constructor: EventDispatcher,
-
-	apply: function ( object ) {
-
-		object.addEventListener = EventDispatcher.prototype.addEventListener;
-		object.hasEventListener = EventDispatcher.prototype.hasEventListener;
-		object.removeEventListener = EventDispatcher.prototype.removeEventListener;
-		object.dispatchEvent = EventDispatcher.prototype.dispatchEvent;
-
-	},
+Object.assign( EventDispatcher.prototype, {
 
 	addEventListener: function ( type, listener ) {
 
@@ -75,7 +64,7 @@ EventDispatcher.prototype = {
 	},
 
 	dispatchEvent: function ( event ) {
-			
+
 		if ( this._listeners === undefined ) return;
 
 		var listeners = this._listeners;
@@ -85,16 +74,16 @@ EventDispatcher.prototype = {
 
 			event.target = this;
 
-			var array = [];
+			var array = [], i = 0;
 			var length = listenerArray.length;
 
-			for ( var i = 0; i < length; i ++ ) {
+			for ( i = 0; i < length; i ++ ) {
 
 				array[ i ] = listenerArray[ i ];
 
 			}
 
-			for ( var i = 0; i < length; i ++ ) {
+			for ( i = 0; i < length; i ++ ) {
 
 				array[ i ].call( this, event );
 
@@ -104,4 +93,4 @@ EventDispatcher.prototype = {
 
 	}
 
-};
+} );
