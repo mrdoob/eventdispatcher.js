@@ -1,0 +1,17 @@
+{
+  "name": "eventdispatcher.js",
+  "version": "1.0.0",
+  "authors": [
+    "Mr.doob"
+  ],
+  "description": "JavaScript events for custom objects",
+  "main": "src/EventDispatcher.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "event"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mrdoob/eventdispatcher.js"
+}
