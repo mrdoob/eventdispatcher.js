@@ -2,7 +2,7 @@
   "name": "eventdispatcher.js",
   "version": "1.0.0",
   "authors": [
-    "Rémi Becheras <rbecheras@sirap.fr>"
+    "Mr.doob"
   ],
   "description": "JavaScript events for custom objects",
   "main": "src/EventDispatcher.js",
@@ -13,5 +13,5 @@
     "event"
   ],
   "license": "MIT",
-  "homepage": "http://gitlab.sirap.fr/open-source/eventdispatcher.js"
+  "homepage": "https://github.com/mrdoob/eventdispatcher.js"
 }
