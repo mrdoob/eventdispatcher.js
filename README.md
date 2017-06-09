@@ -11,7 +11,7 @@ eventdispatcher.js
 
 	// Adding events to custom object
 
-	var Car = function () {
+	function Car() {
 
 		this.start = function () {
 
@@ -19,7 +19,7 @@ eventdispatcher.js
 
 		};
 
-	};
+	}
 
 	Object.assign( Car.prototype, EventDispatcher.prototype );
 
