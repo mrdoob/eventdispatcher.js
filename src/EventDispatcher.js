@@ -6,9 +6,21 @@ function EventDispatcher() {}
 
 Object.assign( EventDispatcher.prototype, {
 
-	addEventListener: function ( type, listener ) {
+	addEventListener: function ( type, listener, priority ) {
 
 		if ( this._listeners === undefined ) this._listeners = {};
+
+		if ( this._propagationAllawed === undefined){
+
+			this._propagationAllawed = true;
+
+			this._stopPropagation = function () {
+
+				this._propagationAllawed = false;
+
+			};
+
+		}
 
 		var listeners = this._listeners;
 
@@ -16,11 +28,27 @@ Object.assign( EventDispatcher.prototype, {
 
 			listeners[ type ] = [];
 
+			listeners[ type ].sortByPriority = function() {
+
+				var byPriority = function( a, b ) {
+
+					return b.priority - a.priority;
+
+				};
+
+				this.sort( byPriority );
+
+			};
+
 		}
 
 		if ( listeners[ type ].indexOf( listener ) === - 1 ) {
 
+			listener.priority = priority ? priority : 0;
+
 			listeners[ type ].push( listener );
+
+			listeners[ type ].sortByPriority();
 
 		}
 
@@ -67,13 +95,23 @@ Object.assign( EventDispatcher.prototype, {
 		if ( listenerArray !== undefined ) {
 
 			event.target = this;
+			event.stopPropagation = this._stopPropagation.bind(this);
 
 			var array = listenerArray.slice( 0 );
 
 			for ( var i = 0, l = array.length; i < l; i ++ ) {
 
-				array[ i ].call( this, event );
+				if(this._propagationAllawed) {
 
+					array[ i ].call( this, event );
+
+				} else {
+
+					this._propagationAllawed = true;
+
+					break;
+
+				}
 			}
 
 		}
