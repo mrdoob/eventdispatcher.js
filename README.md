@@ -12,7 +12,7 @@ import { EventDispatcher } from 'EventDispatcher.js';
 
 class Car extends EventDispatcher {
 
-	start () {
+	start() {
 
 		this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
 
