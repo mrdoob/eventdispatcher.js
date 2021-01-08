@@ -5,35 +5,30 @@ eventdispatcher.js
 
 ### Usage ###
 
-```html
-<script src="EventDispatcher.js"></script>
-<script>
+```javascript
+import { EventDispatcher } from 'EventDispatcher.js';
 
-	// Adding events to custom object
+// Adding events to custom object
 
-	function Car() {
+class Car extends EventDispatcher {
 
-		this.start = function () {
+	start () {
 
-			this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
-
-		};
+		this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
 
 	}
 
-	Object.assign( Car.prototype, EventDispatcher.prototype );
+}
 
-	// Using events
+// Using events
 
-	var car = new Car();
+const car = new Car();
 
-	car.addEventListener( 'start', function ( event ) {
+car.addEventListener( 'start', function ( event ) {
 
-		alert( event.message );
+	alert( event.message );
 
-	} );
+} );
 
-	car.start();
-
-</script>
+car.start();
 ```
