@@ -1,19 +1,18 @@
-<script src="../src/EventDispatcher.js"></script>
-<script>
+<script type="module">
+
+	import { EventDispatcher } from '../src/EventDispatcher.js';
 
 	// Adding events to custom object
 
-	function Car() {
+	class Car extends EventDispatcher {
 
-		this.start = function () {
+		start () {
 
 			this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
 
-		};
+		}
 
 	}
-
-	Object.assign( Car.prototype, EventDispatcher.prototype );
 
 	// Using events
 
