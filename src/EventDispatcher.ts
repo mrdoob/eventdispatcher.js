@@ -35,7 +35,7 @@ class EventDispatcher {
 
   }
 
-  hasEventListener(type: string | number, listener: any) {
+  hasEventListener(type: string, listener: any) {
 
     if (this._listeners === undefined) return false;
 
