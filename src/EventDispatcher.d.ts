@@ -27,7 +27,7 @@ export class EventDispatcher {
 
   addEventListener(type: string, listener: ListenerEventLambda) : void;
 
-  hasEventListener(type: string, listener: any) : bool;
+  hasEventListener(type: string, listener: ListenerEventLambda) : bool;
 
   removeEventListener(type: string, listener: ListenerEventLambda) : void;
 
